@@ -1,0 +1,5 @@
+﻿  WrldGen.cpp
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\WrldGen.cpp(29,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  WrldLoop.cpp
+  Generating Code...
+  AutoWrld.vcxproj -> C:\Users\mista\source\repos\AutoWrld\Debug\AutoWrld.exe
