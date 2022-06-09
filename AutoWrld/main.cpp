@@ -21,10 +21,9 @@ int main(int argc,char** argv) {
 	{
 		frameStart = SDL_GetTicks();
 
-		wrldLoop->handleEvents();
 		wrldLoop->update();
 		wrldLoop->render();
-
+		wrldLoop->handleEvents();
 		frameTime = SDL_GetTicks() - frameStart;
 		
 		if (frameDelay > frameTime) {

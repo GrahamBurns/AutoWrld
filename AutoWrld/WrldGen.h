@@ -1,21 +1,31 @@
 #pragma once
+#include "WrldLoop.h"
+#include "GameObject.h"
 #include <string>
 
 class WrldGen
 {
 public:
-
-	WrldGen(std::string tID, int ms, int ts);
+	WrldGen();
 	~WrldGen();
 
-	void GenWrld();
-	void LoadMap(std::string path, int sizeX, int sizeY);
-	void AddTile(int srcX, int srcY, int xpos, int ypos);
-
+	void LoadMap();
+	void DrawMap(int xOffset,int yOffset);
+	void cleanTile(int x, int y, int id);
+	void placeInMap(int y, int x,int id);
+	int pathChecker(int x, int y);
+	
 private:
-	std::string texID;
-	int mapScale;
-	int tileSize;
-	int scaledSize;
 
+	SDL_Rect src, dest;
+
+	static const int XSIZE = 50;
+	static const int YSIZE = 50;
+
+	SDL_Texture* dirt;
+	SDL_Texture* grass;
+	SDL_Texture* water;
+	int _worldY = 0;
+	int _worldX = 0;
 };
+

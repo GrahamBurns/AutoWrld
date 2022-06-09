@@ -1,26 +1,28 @@
 #include "WrldLoop.h"
-#include "TextureManager.h"
-#include "Components.h"
-#include "Vector2D.h"
-#include "Collision.h"
-#include "AssetManager.h"
-#include <sstream>
+#include <iostream>
+#include "Krog.h"
+#include <wtypes.h>
 #include "WrldGen.h"
+#include <string>
+#include "TextureManager.h"
+#include "GameObject.h"
+#include "WrldGen.h"
+#include "ECS.h"
+#include "Components.h"
+#include "OverlordAI.h"
+#include "Actors.h"
+#include <conio.h>
+#include <iostream>
+#include "CameraControl.h"
+#include "Actors.h"
+#include "AutoGen.h"
 
-Manager manager;
-WrldGen* map;
+using namespace std;
+WrldGen* wrldGen = new WrldGen();
+CameraControl* cam = new CameraControl();
 
-SDL_Renderer* WrldLoop::renderer = nullptr;
 SDL_Event WrldLoop::event;
-
-SDL_Rect WrldLoop::camera = { 0,0,800,640 };
-
-AssetManager* WrldLoop::assets = new AssetManager(&manager);
-
-bool WrldLoop::isRunning = false;
-
-auto& player(manager.addEntity());
-auto& label(manager.addEntity());
+SDL_Renderer* WrldLoop::renderer = nullptr;
 
 WrldLoop::WrldLoop()
 {}
@@ -39,120 +41,82 @@ void WrldLoop::init(const char* title, int width, int height, bool fullscreen)
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
+		window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
 		}
 
 		isRunning = true;
 	}
 
-	//loads texture into memory
-	assets->AddTexture("terrain", "assets/Krog.png");
-	assets->AddTexture("player", "assets/player_anims.png");
-	assets->AddTexture("projectile", "assets/proj.png");
-
-	// map gen in here 3?mapscale and 32pixels x y
-	map = new WrldGen ("assets/Krog.png", 3, 32);
-
-	//map->GenWrld();
-	map->LoadMap("output.txt", 32,32);
-
+	wrldGen = new WrldGen();
+	wrldGen->LoadMap();
 }
-
-auto& tiles(manager.getGroup(WrldLoop::groupMap));
-auto& players(manager.getGroup(WrldLoop::groupPlayers)); // should be actors
-auto& colliders(manager.getGroup(WrldLoop::groupColliders));
 
 void WrldLoop::handleEvents()
 {
-
 	SDL_PollEvent(&event);
 
-	switch (event.type)
+	switch (WrldLoop::event.key.keysym.sym)
 	{
-	case SDL_QUIT:
-		isRunning = false;
+	case SDLK_w:
+		cam->CameraMoveW();
+		break;
+	case SDLK_a:
+		cam->CameraMoveA();
+		break;
+	case SDLK_d:
+		cam->CameraMoveD();
+		break;
+	case SDLK_s:
+		cam->CameraMoveS();
 		break;
 	default:
 		break;
 	}
+
+	//if (WrldLoop::event.type == SDL_KEYUP)
 }
 
-
+int wrldTick = 0;
+int coords;
+OverlordAI OLA;
+int xOffset = 0;
+int yOffset = 0;
+AutoGen* maker = new AutoGen();
 
 void WrldLoop::update()
 {
+	wrldTick++;
 
-	//SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
-	//Vector2D playerPos = player.getComponent<TransformComponent>().position;
-
-	std::stringstream ss; // keeps string of playerposition
-	//ss << "Player position: " << playerPos;
-
-	manager.refresh();
-	manager.update();
-
-	
-	for (auto& c : colliders)
-	{
-		SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
-	//	if (Collision::AABB(cCol, playerCol))
-	//	{
-	//		player.getComponent<TransformComponent>().position = playerPos;
-	//	}
-	}
-	 /*/ pew pews
-	for (auto& p : projectiles)
-	{
-		if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
-		{
-			std::cout << "Hit player!" << std::endl;
-			p->destroy();
+	if (wrldTick == 60) {
+		if (coords == 0) {
+			OLA.MapRef(wrldGen);
+			OLA.spawnEntity(1);
+			maker->generateWrld();
 		}
+		OLA.UpdatePathAI();
+		coords = 1;
+		wrldTick = 0;
 	}
-	*/
-
-	//camera.x = static_cast<int>(player.getComponent<TransformComponent>().position.x - 400);
-	//camera.y = static_cast<int>(player.getComponent<TransformComponent>().position.y - 320);
-
-	if (camera.x < 0)
-		camera.x = 0;
-	if (camera.y < 0)
-		camera.y = 0;
-	if (camera.x > camera.w)
-		camera.x = camera.w;
-	if (camera.y > camera.h)
-		camera.y = camera.h;
 }
+
 
 void WrldLoop::render()
 {
+	xOffset = cam->getX();
+	yOffset = cam->getY();
+
 	SDL_RenderClear(renderer);
-	for (auto& t : tiles)
-	{
-		t->draw();
+	wrldGen->DrawMap(xOffset,yOffset);
+	if (OLA.getNPCCount() != NULL) {
+		for (int i = 0; i < OLA.getNPCCount(); i++) {
+			OLA.getNPC(i)->Update(OLA.getNPC(i)->getX(), OLA.getNPC(i)->getY(), xOffset, yOffset);
+			OLA.getNPC(i)->Render();
+		}
 	}
-
-	for (auto& c : colliders)
-	{
-		c->draw();
-	}
-
-	for (auto& p : players)
-	{
-		p->draw();
-	}
-
-	//for (auto& p : projectiles)
-	//{
-	//	p->draw();
-	//}
-
-	label.draw();
-
 	SDL_RenderPresent(renderer);
 }
 

@@ -16,6 +16,9 @@ public:
 	void UpdatePathAI();
 	int getNPCCount();
 	void MapRef(WrldGen* wrldGen);
+	void Jobassignment();
+
+	void SearchJob();
 
 private:
 

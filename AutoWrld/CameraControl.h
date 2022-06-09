@@ -1,6 +1,7 @@
 #pragma once
 #include "Components.h"
 
+
 class CameraControl 
 {
 
@@ -15,7 +16,7 @@ public:
 	void CameraMoveD();
 	void CameraMoveS();
 
-	float x = 0.0f;
-	float y = 0.0f;
+	int x = 0;
+	int y = 0;
 };
 

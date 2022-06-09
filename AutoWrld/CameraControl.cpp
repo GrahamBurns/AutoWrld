@@ -1,4 +1,7 @@
 #include "CameraControl.h"
+#include <SDL/SDL_keycode.h>
+#include <SDL/SDL_events.h>
+
 
 float CameraControl::getX()
 {
@@ -10,22 +13,22 @@ float CameraControl::getY()
     return y;
 }
 
-void CameraControl::CameraMoveW()
-{
-    y--;
+void CameraControl::CameraMoveW() {
+
+    y++;
 }
 
 void CameraControl::CameraMoveA()
 {
-    x--;
+    x++;
 }
 
 void CameraControl::CameraMoveD()
 {
-    x++;
+    x--;
 }
 
 void CameraControl::CameraMoveS()
 {
-    y++;
+    y--;
 }

@@ -25,7 +25,7 @@ public:
 
 private:
 
-	int job[4]; // x = 1, y = 2, id = 3: will help link things like what to build there or who they fighting, taskID = 4: task id will say what they need to do when they get there.
+	int job[3]; // x = 1, y = 2, id = 3: will help link things like what to build there or who they fighting
 	int actions[10];
 	int actionPoint = 0;
 	bool needsTask = true;
@@ -34,7 +34,7 @@ private:
 
 
 	int objId;
-	int xpos = 5;
+	int xpos = 0;
 	int ypos = 0;
 
 	SDL_Texture* objTexture;

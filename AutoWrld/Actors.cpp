@@ -25,7 +25,7 @@ void Actors::Update(int x, int y) {
 	xpos += x;
 	ypos += y;
 	
-	objTexture = TextureManager::LoadTexture(texturePath.c_str());
+	objTexture = TextureManager::loadTexture(texturePath.c_str());
 
 	xpos += x;
 	ypos += y;
@@ -106,4 +106,9 @@ void Actors::doAction()
 bool Actors::needsNewTask()
 {
 	return needsTask;
+}
+
+void Actors::Render() {
+	
+	SDL_RenderCopy(WrldLoop::renderer, objTexture, &srcRect, &destRect);
 }

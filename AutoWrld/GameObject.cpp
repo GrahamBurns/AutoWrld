@@ -5,41 +5,53 @@
 GameObject::GameObject(int x , int y ,int id)
 {
 	objId = id;
-	ypos = y * 16;
-	xpos = x * 16;
-
-
-
+	ypos = y;
+	xpos = x;
 }
 
 GameObject::GameObject() {
-
+	
 }
 
 GameObject::~GameObject()
 {
 }
 
-void GameObject::Update(int x, int y) {
+void GameObject::Update(int x, int y, int xOffset,int yOffset) {
 	// pass get ai
+
+	objTexture = TextureManager::loadTexture(texturePath.c_str()); // call animation stuff
+	xpos = x;
+	ypos = y;
+		int updatedX = x * 16;
+		int updatedY = y * 16;
+
+		srcRect.h = 16;
+		srcRect.w = 16;
+		srcRect.x = 0;
+		srcRect.y = 0;
+		destRect.x = updatedX + (xOffset * 16);
+		destRect.y = updatedY + (yOffset * 16);
+
+		destRect.w = srcRect.w;
+		destRect.h = srcRect.h;
+}
+
+void GameObject::consume()
+{
+}
+
+void GameObject::wait(int typeOfWaiting)
+{
+	switch (typeOfWaiting)
+	{
+	case 0:	//Building
+		waitTime = 15 - skills[0]; //15 is build time of wall,skills 0 is building skill
+
+	default:
+		break;
+	}
 	
-	xpos += x;
-	ypos += y;
-	
-	objTexture = TextureManager::LoadTexture(texturePath.c_str()); // call animation stuff
-
-	xpos += x;
-	ypos += y;
-
-	srcRect.h = 16;
-	srcRect.w = 16;
-	srcRect.x = 0;
-	srcRect.y = 0;
-	destRect.x = xpos;
-	destRect.y = ypos;
-
-	destRect.w = srcRect.w;
-	destRect.h = srcRect.h;
 
 }
 
@@ -60,7 +72,7 @@ int GameObject::getID()
 
 int GameObject::getJob(int i)
 {
-	return job[i];
+	return jobs[i];
 }
 
 int* GameObject::getActionArr()
@@ -68,40 +80,32 @@ int* GameObject::getActionArr()
 	return actions;
 }
 
+void GameObject::setNeedsTask(bool task)
+{
+	this->needsTask = task;
+}
+
 void GameObject::setID(int id) {
 	objId = id;
 }
 
-void GameObject::setTarget(int targetX, int targetY, int targetID)
+int GameObject::getHunger() {
+	return Hunger;
+}
+
+void GameObject::setTarget(int targetX, int targetY, int job,int atJob)
 {
-	job[0] = targetX;
-	job[1] = targetY;
-	job[2] = targetID;
-	//job[3] = 0; //  what to do & needs to be changed!!!!!!
+	jobs[0] = targetX;
+	jobs[1] = targetY;
+	jobs[2] = job;
+	jobs[3] = atJob;
 
 }
 
-void GameObject::doAction()
+void GameObject::setLocation(int x, int y)
 {
-	if (actions == NULL) {
-		needsTask = true;
-	}
-	else {
-		needsTask = false;
-	}
-
-	Update(actions[actionPoint], actions[actionPoint + 1]);
-	actionPoint++;
-	
-	if (actionPoint == 10) {
-		actionPoint = 0;
-		needsTask = true;
-	}
-
-	if (actions[actionPoint] == 0 && actions[actionPoint+1] == 0) {
-		actionPoint = 0;
-		needsTask = true;
-	}
+	this->xpos = x;
+	this->ypos = y;
 }
 
 bool GameObject::needsNewTask()

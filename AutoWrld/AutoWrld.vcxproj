@@ -146,40 +146,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actors.cpp" />
-    <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AutoGen.cpp" />
     <ClCompile Include="CameraControl.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="ECS.cpp" />
+    <ClCompile Include="Collison.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="JobAssigner.cpp" />
     <ClCompile Include="Krog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OverlordAI.cpp" />
     <ClCompile Include="PathFindingAi.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="WrldGen.cpp" />
     <ClCompile Include="WrldLoop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actors.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="AutoGen.h" />
     <ClInclude Include="CameraControl.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Collison.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="ECS.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="KeyboardController.h" />
+    <ClInclude Include="JobAssigner.h" />
     <ClInclude Include="Krog.h" />
     <ClInclude Include="OverlordAI.h" />
     <ClInclude Include="PathFindingAi.h" />
-    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="TileComponent.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="UILabel.h" />
-    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="WrldGen.h" />
     <ClInclude Include="WrldLoop.h" />
   </ItemGroup>

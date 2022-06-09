@@ -11,44 +11,41 @@ void PathFindingAi::updatePath(int x, int y, int pathValue)
     pathingMap[x][y] = pathValue;
 }
 
-void PathFindingAi::actions(GameObject* NPC)
+void PathFindingAi::actions(GameObject* npc)
 {
-    int tarX = NPC->getJob(0);
-    int tarY = NPC->getJob(1);
-    int* j = NPC->getActionArr();
+    if (npc->getJob(3) == 1) {
+        doAction(npc);
+        return;
+    }
 
+    int x = 0, y = 0;       
 
-    for (int act = 0; act < 5; act++) {
-        int x = 0;
-        int y = 0;
-
-
-        if (NPC->getX() > NPC->getJob(0))
+        if (npc->getX() > npc->getJob(0))
             x--;
-        else if (NPC->getX() < NPC->getJob(0))
+        else if (npc->getX() < npc->getJob(0))
             x++;
         else
             x = x;
 
-        if (NPC->getY() > NPC->getJob(1))
+        if (npc->getY() > npc->getJob(1))
             y--;
-        else if (NPC->getY() < NPC->getJob(1))
+        else if (npc->getY() < npc->getJob(1))
             y++;
         else
             y = y;
 
-        if (j[act] == x && j[act + 1] == y) {
-            return;
+        map->cleanTile(npc->getX(), npc->getY(), npc->getID());
+        npc->setLocation(npc->getX() + x, npc->getY() + y);
+
+        if (npc->getJob(0) == x && npc->getJob(1) == y) { //TRIGGER JOB
+            npc->setTarget(npc->getX(), npc->getY(), npc->getJob(2), 1);
         }
-
-        if (3 > NPC->getX() - NPC->getJob(0) && 3 > NPC->getJob(1) - NPC->getY()) { // 3 is how close i want them to be!
-            std::cout << "Hello" << std::endl;
-            //NPC->
-        }
-
-
-        j[act] = x;
-        j[act + 1] = y; // maybe out of bounds
-    }
-
 }
+
+void PathFindingAi::doAction(GameObject* NPC) {
+    //find what job it is and do it
+    if (NPC->waitTime != 0 && !(NPC->needsNewTask()))
+        NPC->waitTime -= 1;
+    else 
+       NPC->setNeedsTask(true);
+} 

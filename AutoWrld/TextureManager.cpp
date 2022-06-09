@@ -1,15 +1,16 @@
 #include "TextureManager.h"
 
-SDL_Texture* TextureManager::LoadTexture(const char* texture)
+SDL_Texture* TextureManager::loadTexture(const char* filename)
 {
-	SDL_Surface* tempSurface = IMG_Load(texture);
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(WrldLoop::renderer, tempSurface);
-	SDL_FreeSurface(tempSurface);
+    SDL_Surface* tempSurface = IMG_Load(filename);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(WrldLoop::renderer,tempSurface);
+    SDL_FreeSurface(tempSurface);
 
-	return tex;
+
+    return tex;
 }
 
-void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip)
+void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src ,SDL_Rect dest)
 {
-	SDL_RenderCopyEx(WrldLoop::renderer, tex, &src, &dest, NULL, NULL, flip);
+    SDL_RenderCopy(WrldLoop::renderer, tex, &src,  &dest);
 }

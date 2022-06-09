@@ -1,100 +1,74 @@
 #include "WrldGen.h"
-#include "WrldLoop.h"
-#include <fstream>
-#include "ECS.h"
-#include "Components.h"
+#include "TextureManager.h"
+#include <iostream>
 
-extern Manager manager;
-// texID is a string that  pass it in eventually not outside
+int map[50][50];
 
-WrldGen::WrldGen(std::string tID, int ms, int ts) : texID(tID),  mapScale(ms), tileSize(ts)
+WrldGen::WrldGen()
 {
-	scaledSize = ms * ts;
+	dirt = TextureManager::loadTexture("assets/Kerg.png");
+	grass = TextureManager::loadTexture("assets/derp.png");
+	water = TextureManager::loadTexture("assets/derp.png");
+
+	LoadMap();
+	src.x = 0;
+	src.y = 0;
+	src.w = dest.w = 16;
+	src.h = dest.h = 16;
+
+	dest.x = dest.y = 0;
 }
 
 WrldGen::~WrldGen()
 {
 }
 
-void WrldGen::GenWrld()
+int arr[50][50];
+
+void WrldGen::LoadMap()
 {
-	std::string filename("output.txt");
-	std::fstream output_fstream;
-
-	output_fstream.open(filename, std::ios_base::out);
-	if (!output_fstream.is_open()) {
-		std::cerr << "Failed to open " << filename << '\n';
-	}
-	
-	srand(time(NULL));
-	int y = 10;
-	for (int i = 0; i < 100;i++) {
-		int n = rand() % 5 + 1;
-		if (y == 10) {
-			output_fstream << std::endl;
-			y = 0;
+	for (int row = 0; row < XSIZE; row++) {
+		for (int column = 0; column < YSIZE; column++) {
+			map[row][column] = arr[row][column];
 		}
-		else {
-			output_fstream << n;
-		}
-		y++;
 	}
-	std::cerr << "Done Writing!" << std::endl;
-
 }
 
-void WrldGen::LoadMap(std::string path, int sizeX, int sizeY)
+void WrldGen::DrawMap(int xOffset, int yOffset)
 {
-	char c;
-	std::fstream WrldGenFile;
-	WrldGenFile.open(path);
+	int type = 0;
 
-	int srcX = 32, srcY = 32;
-	AddTile(srcX, srcY, 10 * scaledSize, 10 * scaledSize);
-	auto& tcol(manager.addEntity());
-	//says what it is 
-	tcol.addComponent<ColliderComponent>("terrain", 100 * scaledSize, 100 * scaledSize, scaledSize);
-	tcol.addGroup(WrldLoop::groupColliders);
+	for (int row = 0; row < XSIZE; row++) {
+		for (int column = 0; column < YSIZE; column++) {
+			type = map[row][column];
 
-	/*
-	for (int y = 0; y < sizeY; y++) // wont need it just determines world size and tile size
-	{
-		for (int x = 0; x < sizeX; x++)
-		{
-			WrldGenFile.get(c);				//gets line to find 
-			srcY = atoi(&c) * tileSize;
-			WrldGenFile.get(c);
-			srcX = atoi(&c) * tileSize;
-			AddTile(srcX, srcY, x * scaledSize, y * scaledSize);
-			WrldGenFile.ignore();
-		}
-	}
+			dest.x = ((column + xOffset)) * 16;
+			dest.y = (row + yOffset) * 16;
 
-	WrldGenFile.ignore();
-	*/
-	for (int y = 0; y < sizeY; y++)
-	{
-		for (int x = 0; x < sizeX; x++)
-		{
-			WrldGenFile.get(c);
-			if (c == '1')
-			{
-
-				// generate no go collider
-				auto& tcol(manager.addEntity());
-				//says what it is 
-				tcol.addComponent<ColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
-				tcol.addGroup(WrldLoop::groupColliders);
+			switch (type) {
+			case 0:
+					TextureManager::Draw(water, src, dest);
+					break;
+			case 1:
+					TextureManager::Draw(dirt, src, dest);
+					break;
+			case 2:
+					TextureManager::Draw(water, src, dest);
+					break;
 			}
-			WrldGenFile.ignore();
 		}
 	}
-	WrldGenFile.close();
 }
 
-void WrldGen::AddTile(int srcX, int srcY, int xpos, int ypos)
-{
-	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
-	tile.addGroup(WrldLoop::groupMap);
+int WrldGen::pathChecker(int x, int y)
+{	
+	return map[x][y];
+}
+
+void WrldGen::cleanTile(int x, int y,int id) {
+	map[x][y] = 0; //is dirt for now
+}
+
+void WrldGen::placeInMap(int y, int x,int id) { //only thing that will need this is lesser updated things such as Chairs or walls 
+	map[x][x] = id;
 }
