@@ -1,5 +1,13 @@
-﻿  WrldGen.cpp
-C:\Users\mista\source\repos\AutoWrld\AutoWrld\WrldGen.cpp(29,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Collison.cpp
+  GameObject.cpp
+  JobAssigner.cpp
+  Krog.cpp
+  OverlordAI.cpp
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\OverlordAI.cpp(32,23): warning C4018: '<': signed/unsigned mismatch
+  PathFindingAi.cpp
+  WrldGen.cpp
   WrldLoop.cpp
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\WrldLoop.cpp(123,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\WrldLoop.cpp(124,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
-  AutoWrld.vcxproj -> C:\Users\mista\source\repos\AutoWrld\Debug\AutoWrld.exe
+SDL2.dll : fatal error LNK1112: module machine type 'x64' conflicts with target machine type 'x86'

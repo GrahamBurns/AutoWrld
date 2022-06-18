@@ -24,6 +24,7 @@ int main(int argc,char** argv) {
 		wrldLoop->update();
 		wrldLoop->render();
 		wrldLoop->handleEvents();
+		//wrldLoop->handleMouseEvents();
 		frameTime = SDL_GetTicks() - frameStart;
 		
 		if (frameDelay > frameTime) {

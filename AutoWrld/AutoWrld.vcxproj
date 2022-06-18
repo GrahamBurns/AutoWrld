@@ -155,6 +155,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OverlordAI.cpp" />
     <ClCompile Include="PathFindingAi.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WrldGen.cpp" />
     <ClCompile Include="WrldLoop.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Krog.h" />
     <ClInclude Include="OverlordAI.h" />
     <ClInclude Include="PathFindingAi.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="WrldGen.h" />
     <ClInclude Include="WrldLoop.h" />

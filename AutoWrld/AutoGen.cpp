@@ -54,10 +54,9 @@ int AutoGen::surroundingChecker(int x , int y,int pref) {
 
 void AutoGen::generateWrld()
 {
-	int chance;
+	int chance = getrandNum(1, 2);
 	int choice = getrandNum(1, 3);
 
-	 heatMap[0][0] = choice;
 	 int chanceWater = 1;
 	 int chanceLand = 2;
 	 int chanceSand = 5;
@@ -65,50 +64,94 @@ void AutoGen::generateWrld()
 	// int chanceTree = 1;
 
 	 for (int x = 0;x < SIZE;x++) {
-		 int del = 2;
 		 for (int y = 0;y < SIZE;y++) {
-			 choice = getrandNum(1, 3);
-
-				 if (choice == 1) {
-					 chance = surroundingChecker(x, y - 1, 2);
-					 choice = getrandNum(1, chanceWater - chance);		// WATER
-
-					 if (choice < 2) {
-						 heatMap[x][y] = 1;
-					 }
-					 else {
-						 heatMap[x][y] = 2;
-						 chanceWater = 1;
-					 }
-				 }
-				 else if (choice == 2) {						//SAND
-					 chance = surroundingChecker(x, y - 1, 1);
-					 choice = getrandNum(1, chanceSand - chance);
-
-					 if (choice == 1) {
-						 heatMap[x][y] = 2;
-					 }
-					 else {
-						 heatMap[x][y] = 3;
-						 chanceSand = 5;
-					 }
-
-				 }
-				 else if (choice == 3) {						//LAND
-					 chance = surroundingChecker(x, y - 1,2);
-					 choice = getrandNum(1, chanceLand - chance);
-
-					 if (choice < 3) {
-						 heatMap[x][y] = 3;
-					 }
-					 else {
-						 heatMap[x][y] = 1;
-						 chanceLand = 1;
-					 }
-
-				 }
+			heatMap[x][y] = 3;
 		 }
 	 }
+
+	 if (choice != 0) {
+		int x = getrandNum(0, SIZE);
+		int y = getrandNum(0, SIZE);
+
+
+
+		if (chance == 1) {
+			chance = getrandNum(1, 2);
+			if (chance == 1)
+				x = 0;
+			else
+				x = SIZE;
+		}
+		else {
+			chance = getrandNum(1, 2);
+			if (chance == 1)
+				y = 0;
+			else
+				y = SIZE;
+		}
+
+		int r = getrandNum(0, SIZE);	// row
+		int c = getrandNum(0, SIZE);	// column
+
+
+		if (chance == 1)
+			r = 0;
+		else
+			c = 0;
+
+		//heatMap[r][c] = 1;
+
+
+
+
+
+		bool met = false;
+		int moveX = 0;
+		int moveY = 0;
+		int riverSize = getrandNum(2, 2);
+		while (!met) {
+			heatMap;
+			moveX = 0;
+			moveY = 0;
+
+			if (riverSize + 1 > 1) {
+				if ((r - riverSize) > 0)
+					if ((r + riverSize) < SIZE) {
+						for (int i = (riverSize * -1);i < riverSize;i++) {
+							heatMap[r + i][c] = 1;
+						}
+					}
+			}
+
+				if (x < c)
+					moveX--;
+				else if (x > c)
+					moveX++;
+				else
+					moveX = moveX;
+
+				if (y < r)
+					moveY--;
+				else if (y > r)
+					moveY++;
+				else
+					moveY = moveY;
+
+
+			r += moveY;
+			c += moveX;
+
+			//heatMap[r][c] = 1;
+
+			if (x == c && y == r) {
+				met = true;
+			}
+
+		}
+	}
+
+
+
 	 saveWrld();
 }
 

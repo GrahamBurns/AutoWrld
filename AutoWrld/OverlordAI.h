@@ -11,7 +11,7 @@ class OverlordAI
 public:
 	OverlordAI();
 	void LocalWeather(int rainfallPer, int season);
-	void spawnEntity(int creatureID);
+	void spawnEntity(int x,int y);
 	GameObject* getNPC(int id);
 	void UpdatePathAI();
 	int getNPCCount();

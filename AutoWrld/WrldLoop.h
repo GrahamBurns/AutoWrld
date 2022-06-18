@@ -13,6 +13,7 @@ public:
 	void GetDesktopResolution(int& horizontal, int& vertical);
 
 	void handleEvents();
+	void handleMouseEvents();
 	void update();
 	bool running() { return isRunning; }
 	void render();
@@ -20,6 +21,7 @@ public:
 
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
+	static SDL_Event mEvent;
 private:
 
 	int _horizontal = 0;

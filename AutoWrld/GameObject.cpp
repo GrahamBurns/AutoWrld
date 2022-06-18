@@ -20,9 +20,10 @@ GameObject::~GameObject()
 void GameObject::Update(int x, int y, int xOffset,int yOffset) {
 	// pass get ai
 
-	objTexture = TextureManager::loadTexture(texturePath.c_str()); // call animation stuff
-	xpos = x;
-	ypos = y;
+		objTexture = TextureManager::loadTexture(texturePath.c_str()); // call animation stuff
+		xpos = x;
+		ypos = y;
+
 		int updatedX = x * 16;
 		int updatedY = y * 16;
 
@@ -47,12 +48,10 @@ void GameObject::wait(int typeOfWaiting)
 	{
 	case 0:	//Building
 		waitTime = 15 - skills[0]; //15 is build time of wall,skills 0 is building skill
-
+		break;
 	default:
 		break;
 	}
-	
-
 }
 
 int GameObject::getX()
@@ -99,7 +98,6 @@ void GameObject::setTarget(int targetX, int targetY, int job,int atJob)
 	jobs[1] = targetY;
 	jobs[2] = job;
 	jobs[3] = atJob;
-
 }
 
 void GameObject::setLocation(int x, int y)

@@ -7,21 +7,20 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "WrldGen.h"
-#include "ECS.h"
-#include "Components.h"
 #include "OverlordAI.h"
 #include "Actors.h"
 #include <conio.h>
-#include <iostream>
 #include "CameraControl.h"
 #include "Actors.h"
 #include "AutoGen.h"
+#include "Renderer.h"
 
 using namespace std;
 WrldGen* wrldGen = new WrldGen();
 CameraControl* cam = new CameraControl();
 
 SDL_Event WrldLoop::event;
+SDL_Event WrldLoop::mEvent;
 SDL_Renderer* WrldLoop::renderer = nullptr;
 
 WrldLoop::WrldLoop()
@@ -55,10 +54,14 @@ void WrldLoop::init(const char* title, int width, int height, bool fullscreen)
 	wrldGen->LoadMap();
 }
 
+int xOffset = 0;
+int yOffset = 0;
+OverlordAI OLA;
+
 void WrldLoop::handleEvents()
 {
 	SDL_PollEvent(&event);
-
+	
 	switch (WrldLoop::event.key.keysym.sym)
 	{
 	case SDLK_w:
@@ -76,16 +79,26 @@ void WrldLoop::handleEvents()
 	default:
 		break;
 	}
-
-	//if (WrldLoop::event.type == SDL_KEYUP)
 }
+/*
+void WrldLoop::handleMouseEvents() {
+	
+	SDL_PollEvent(&mEvent);
+
+	switch (mEvent.type) {
+	case SDL_MOUSEMOTION:
+		std::cout << (mEvent.motion.x / 16) - xOffset << " " << (mEvent.motion.x / 16) - xOffset << std::endl;
+		break;
+	case SDL_MOUSEBUTTONDOWN:
+		OLA.spawnEntity(((mEvent.motion.x / 16) - xOffset), ((mEvent.motion.x / 16) - xOffset));
+	}
+}
+*/
 
 int wrldTick = 0;
 int coords;
-OverlordAI OLA;
-int xOffset = 0;
-int yOffset = 0;
 AutoGen* maker = new AutoGen();
+Renderer* textureLoader = new Renderer();
 
 void WrldLoop::update()
 {
@@ -94,8 +107,9 @@ void WrldLoop::update()
 	if (wrldTick == 60) {
 		if (coords == 0) {
 			OLA.MapRef(wrldGen);
-			OLA.spawnEntity(1);
+			OLA.spawnEntity(0,0);
 			maker->generateWrld();
+			textureLoader->loadTextures(OLA.getNPC(0));
 		}
 		OLA.UpdatePathAI();
 		coords = 1;
@@ -114,7 +128,8 @@ void WrldLoop::render()
 	if (OLA.getNPCCount() != NULL) {
 		for (int i = 0; i < OLA.getNPCCount(); i++) {
 			OLA.getNPC(i)->Update(OLA.getNPC(i)->getX(), OLA.getNPC(i)->getY(), xOffset, yOffset);
-			OLA.getNPC(i)->Render();
+			textureLoader->render(OLA.getNPC(i),xOffset,yOffset);
+			//OLA.getNPC(i)->Render();
 		}
 	}
 	SDL_RenderPresent(renderer);
