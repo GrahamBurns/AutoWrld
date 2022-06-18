@@ -102,7 +102,7 @@ void WrldLoop::update()
 {
 	wrldTick++;
 
-	if (wrldTick == 60) {
+	if (wrldTick == 10) {
 		if (coords == 0) {
 			OLA.MapRef(wrldGen);
 			OLA.spawnEntity(0,0);

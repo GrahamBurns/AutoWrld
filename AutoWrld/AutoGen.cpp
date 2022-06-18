@@ -141,7 +141,7 @@ void AutoGen::generateWrld()
 			r += moveY;
 			c += moveX;
 
-			//heatMap[r][c] = 1;
+			heatMap[r][c] = 1;
 
 			if (x == c && y == r) {
 				met = true;

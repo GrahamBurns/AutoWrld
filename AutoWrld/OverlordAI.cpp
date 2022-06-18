@@ -48,6 +48,7 @@ void OverlordAI::spawnEntity(int x, int y) // also needs to set x and y
        x = gen.getrandNum(0, 20);
        y = gen.getrandNum(0, 20);
 
+        krog->setLocation(gen.getrandNum(0, 50), gen.getrandNum(0, 50));
         krog->setID(i);
         krog->setTarget(gen.getrandNum(0, 50), gen.getrandNum(0, 50), 0, 0);
         NPC.push_back(krog);
