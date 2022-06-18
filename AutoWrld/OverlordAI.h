@@ -1,6 +1,5 @@
 #pragma once
 #include "GameObject.h"
-#include "Actors.h"
 #include <vector>
 #include "WrldGen.h"
 #include "Krog.h"

@@ -36,9 +36,6 @@
     <ClCompile Include="OverlordAI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Actors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CameraControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,16 +71,7 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ECS.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OverlordAI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Actors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CameraControl.h">

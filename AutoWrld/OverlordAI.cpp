@@ -8,6 +8,7 @@
 
 OverlordAI::OverlordAI()
 {
+    NPC.reserve(1000);
 }
 
 void OverlordAI::LocalWeather(int rainfallPer, int season)
@@ -41,13 +42,12 @@ void OverlordAI::spawnEntity(int x, int y) // also needs to set x and y
 {
     //TESTING STUFF
 
-    for (int i = 0; i < 250; i++) {
+    for (int i = 0; i < 1000; i++) {
         Krog* krog = new Krog();
 
        x = gen.getrandNum(0, 20);
        y = gen.getrandNum(0, 20);
 
-        krog->Update(gen.getrandNum(0, 50), gen.getrandNum(0, 50), 0, 0);      // needs to start at zero becuase array starts at 0 not 1 stupid!! so he at 6,6 ALSO only take -1 from here not from anywhere else
         krog->setID(i);
         krog->setTarget(gen.getrandNum(0, 50), gen.getrandNum(0, 50), 0, 0);
         NPC.push_back(krog);

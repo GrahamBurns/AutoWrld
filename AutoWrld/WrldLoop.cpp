@@ -8,10 +8,8 @@
 #include "GameObject.h"
 #include "WrldGen.h"
 #include "OverlordAI.h"
-#include "Actors.h"
 #include <conio.h>
 #include "CameraControl.h"
-#include "Actors.h"
 #include "AutoGen.h"
 #include "Renderer.h"
 
@@ -127,7 +125,6 @@ void WrldLoop::render()
 	wrldGen->DrawMap(xOffset,yOffset);
 	if (OLA.getNPCCount() != NULL) {
 		for (int i = 0; i < OLA.getNPCCount(); i++) {
-			OLA.getNPC(i)->Update(OLA.getNPC(i)->getX(), OLA.getNPC(i)->getY(), xOffset, yOffset);
 			textureLoader->render(OLA.getNPC(i),xOffset,yOffset);
 			//OLA.getNPC(i)->Render();
 		}

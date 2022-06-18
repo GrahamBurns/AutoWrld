@@ -145,7 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actors.cpp" />
     <ClCompile Include="AutoGen.cpp" />
     <ClCompile Include="CameraControl.cpp" />
     <ClCompile Include="Collison.cpp" />
@@ -161,12 +160,9 @@
     <ClCompile Include="WrldLoop.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actors.h" />
     <ClInclude Include="AutoGen.h" />
     <ClInclude Include="CameraControl.h" />
     <ClInclude Include="Collison.h" />
-    <ClInclude Include="Components.h" />
-    <ClInclude Include="ECS.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="JobAssigner.h" />
     <ClInclude Include="Krog.h" />

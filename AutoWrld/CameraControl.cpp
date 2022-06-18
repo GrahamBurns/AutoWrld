@@ -1,6 +1,4 @@
 #include "CameraControl.h"
-#include <SDL/SDL_keycode.h>
-#include <SDL/SDL_events.h>
 
 
 float CameraControl::getX()

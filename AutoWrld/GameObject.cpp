@@ -17,26 +17,7 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Update(int x, int y, int xOffset,int yOffset) {
-	// pass get ai
 
-		objTexture = TextureManager::loadTexture(texturePath.c_str()); // call animation stuff
-		xpos = x;
-		ypos = y;
-
-		int updatedX = x * 16;
-		int updatedY = y * 16;
-
-		srcRect.h = 16;
-		srcRect.w = 16;
-		srcRect.x = 0;
-		srcRect.y = 0;
-		destRect.x = updatedX + (xOffset * 16);
-		destRect.y = updatedY + (yOffset * 16);
-
-		destRect.w = srcRect.w;
-		destRect.h = srcRect.h;
-}
 
 void GameObject::consume()
 {
@@ -109,9 +90,4 @@ void GameObject::setLocation(int x, int y)
 bool GameObject::needsNewTask()
 {
 	return needsTask;
-}
-
-void GameObject::Render() {
-	
-	SDL_RenderCopy(WrldLoop::renderer, objTexture, &srcRect, &destRect);
 }

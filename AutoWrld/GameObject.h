@@ -23,8 +23,6 @@ public:
 	void setLocation(int x, int y);
 	bool needsNewTask();
 
-	void Render();
-	void Update(int xpos, int ypos, int xOffset, int yOffset);
 	void consume();
 	void wait(int typeOfWaiting);
 
@@ -36,17 +34,15 @@ public:
 	int skills[5];
 	int actionPoint = 0;
 	bool needsTask = true;
-
-	int loadCode;
-	int objId;
-	int Hunger;
-	int Health;
-	bool isAlive;
-	int waitTime;
-
 	int xpos;
 	int ypos;
+	int Hunger;
+	int Health;
 
-	SDL_Texture* objTexture;
-	SDL_Rect srcRect, destRect;
+	int loadCode;
+	bool isActive;	// checks to see if it can even do things
+	bool isAlive = true;
+
+	int objId;
+	int waitTime;
 };

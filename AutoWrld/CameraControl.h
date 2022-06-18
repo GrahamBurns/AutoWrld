@@ -1,11 +1,9 @@
 #pragma once
-#include "Components.h"
-
+#include <SDL/SDL_keycode.h>
+#include <SDL/SDL_events.h>
 
 class CameraControl 
 {
-
-
 public:
 
 
