@@ -147,29 +147,40 @@
   <ItemGroup>
     <ClCompile Include="AutoGen.cpp" />
     <ClCompile Include="CameraControl.cpp" />
+    <ClCompile Include="CogObject.cpp" />
     <ClCompile Include="Collison.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="JobAssigner.cpp" />
+    <ClCompile Include="JobCreator.cpp" />
     <ClCompile Include="Krog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OverlordAI.cpp" />
     <ClCompile Include="PathFindingAi.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="VehicleObject.cpp" />
     <ClCompile Include="WrldGen.cpp" />
     <ClCompile Include="WrldLoop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoGen.h" />
     <ClInclude Include="CameraControl.h" />
+    <ClInclude Include="CogObject.h" />
     <ClInclude Include="Collison.h" />
+    <ClInclude Include="Effects.h" />
+    <ClInclude Include="enums.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HelperClasses.h" />
     <ClInclude Include="JobAssigner.h" />
+    <ClInclude Include="JobCreator.h" />
     <ClInclude Include="Krog.h" />
+    <ClInclude Include="NeedUnfufillment.h" />
     <ClInclude Include="OverlordAI.h" />
     <ClInclude Include="PathFindingAi.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="VehicleObject.h" />
     <ClInclude Include="WrldGen.h" />
     <ClInclude Include="WrldLoop.h" />
   </ItemGroup>

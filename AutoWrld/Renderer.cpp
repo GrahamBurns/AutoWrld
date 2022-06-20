@@ -38,3 +38,36 @@ void Renderer::render(GameObject* thing,int xOffset,int yOffset)
 
 	TextureManager::Draw(textures[thing->loadCode], srcRect, destRect);
 }
+
+void Renderer::loadTexturesVehicle(VehicleObject* thing)
+{
+	bool foundTex = false;
+
+	for (int x = 0; x < thing->vehicle.size();x++) {
+		for (int i = 0; i < loadedTextures.size() ;i++) {
+			if (thing->vehicle[x]->texturePath == loadedTextures[i]) {
+				foundTex = true;
+				thing->vehicle[x]->loadCode = i;
+			}
+		}
+		if (!foundTex) {
+			textures.push_back(TextureManager::loadTexture(thing->vehicle[x]->texturePath.c_str()));
+			loadedTextures.push_back(thing->vehicle[x]->texturePath);
+			thing->vehicle[x]->loadCode = loadedTextures.size() - 1;
+		}
+	}
+}
+
+void Renderer::renderVehicle(VehicleObject* thing, int xOffset, int yOffset)
+{
+
+	for (int x = 0; x < thing->vehicle.size();x++) {
+
+		destRect.x = (thing->vehicle[x]->xpos + xOffset) * 16;
+		destRect.y = (thing->vehicle[x]->ypos + yOffset) * 16;
+
+		TextureManager::Draw(textures[thing->vehicle[x]->loadCode], srcRect, destRect);
+	}
+
+
+}

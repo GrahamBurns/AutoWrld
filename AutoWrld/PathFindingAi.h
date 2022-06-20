@@ -11,8 +11,6 @@ public:
 	void updatePath(int x, int y, int pathValue);
 	void actions(GameObject* NPC);
 
-	void doAction(GameObject* NPC);
-
 private:
 	int pathingMap[30][30];
 	WrldGen* map;

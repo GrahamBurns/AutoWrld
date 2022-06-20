@@ -3,11 +3,8 @@
 Krog::Krog()
 {
 	texturePath = texture;
-	texturePath = texture;
-	Hunger = hunger;
-	Health = health;
 	isAlive = true;
-	skills[0] = (5); // will replace with a function that is called and needs to pass creature Type similar with subclasses for modibility
+	baseSkills[0] = (5); // will replace with a function that is called and needs to pass creature Type similar with subclasses for modibility
 
 }
 

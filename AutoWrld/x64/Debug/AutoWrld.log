@@ -1,3 +1,9 @@
 ﻿  OverlordAI.cpp
-C:\Users\mista\source\repos\AutoWrld\AutoWrld\OverlordAI.cpp(68,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\OverlordAI.cpp(114,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\OverlordAI.cpp(123,26): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PathFindingAi.cpp
+  WrldLoop.cpp
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\WrldLoop.cpp(123,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mista\source\repos\AutoWrld\AutoWrld\WrldLoop.cpp(124,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
   AutoWrld.vcxproj -> C:\Users\mista\source\repos\AutoWrld\x64\Debug\AutoWrld.exe

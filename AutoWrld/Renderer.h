@@ -3,11 +3,16 @@
 #include <SDL/SDL_render.h>
 #include <vector>
 #include "GameObject.h"
+#include "VehicleObject.h"
 class Renderer {
 public:
 	Renderer();
 	void loadTextures(GameObject* thing);
 	void render(GameObject* thing, int xOffset, int yOffset);
+
+	void loadTexturesVehicle(VehicleObject* thing);
+
+	void renderVehicle(VehicleObject* thing, int xOffset, int yOffset);
 
 private:
 	std::vector <SDL_Texture*> textures;

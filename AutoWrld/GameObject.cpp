@@ -7,6 +7,9 @@ GameObject::GameObject(int x , int y ,int id)
 	objId = id;
 	ypos = y;
 	xpos = x;
+	needs[0] = HUNGER;
+	needs[1] = THIRST;
+	needs[2] = OXYGEN;
 }
 
 GameObject::GameObject() {
@@ -15,24 +18,6 @@ GameObject::GameObject() {
 
 GameObject::~GameObject()
 {
-}
-
-
-
-void GameObject::consume()
-{
-}
-
-void GameObject::wait(int typeOfWaiting)
-{
-	switch (typeOfWaiting)
-	{
-	case 0:	//Building
-		waitTime = 15 - skills[0]; //15 is build time of wall,skills 0 is building skill
-		break;
-	default:
-		break;
-	}
 }
 
 int GameObject::getX()
@@ -50,12 +35,12 @@ int GameObject::getID()
 	return objId;
 }
 
-int GameObject::getJob(int i)
+int GameObject::getNeed(NEEDS n)
 {
-	return jobs[i];
+	return needMeters[n];
 }
 
-int* GameObject::getActionArr()
+int* GameObject::getActionArr()		// USE TO PREVENT THINGS OVERCALLING PATHFINDING
 {
 	return actions;
 }
@@ -65,20 +50,11 @@ void GameObject::setNeedsTask(bool task)
 	this->needsTask = task;
 }
 
-void GameObject::setID(int id) {
-	objId = id;
-}
-
-int GameObject::getHunger() {
-	return Hunger;
-}
-
-void GameObject::setTarget(int targetX, int targetY, int job,int atJob)
-{
-	jobs[0] = targetX;
-	jobs[1] = targetY;
-	jobs[2] = job;
-	jobs[3] = atJob;
+	void GameObject::setTarget(int targetX, int targetY, int job,int atJob){	//DONT NEED THIS OR tasks[]
+	tasks[0] = targetX;
+	tasks[1] = targetY;
+	tasks[2] = job;
+	tasks[3] = atJob;
 }
 
 void GameObject::setLocation(int x, int y)

@@ -1,0 +1,38 @@
+#pragma once
+enum NEEDS
+{
+	HUNGER,
+	THIRST,
+	SLEEP,
+	OXYGEN,
+};
+
+enum JOBS {
+
+	BUILD,
+	SLEEPING,
+	EAT,
+	DRINK,
+	FIGHT,
+	OPERATE,
+
+};
+
+enum TRAITS {
+
+	SCARED,
+	BRAVE,
+	TOUGH,
+	HUNGRY,
+	STARVING,
+	MALNOURISHED,
+};
+
+enum SKILLS {
+	BUILDING,
+	MINING,
+};
+
+enum STATES {};
+
+

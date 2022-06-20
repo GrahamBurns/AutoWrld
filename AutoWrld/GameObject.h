@@ -1,7 +1,10 @@
 #pragma once
 #include <SDL/SDL_render.h>
 #include <string>
+#include "enums.h"
+#include <vector>
 
+//SDL_SetTextureAlphaMod(img, opacity); for texture brightness 
 
 class GameObject {
 
@@ -13,36 +16,41 @@ public:
 	int getX();
 	int getY();
 	int getID();
-	int getHunger();
-	int getJob(int i);
+	int getNeed(NEEDS n);
+	int getTask(int i);
 	int* getActionArr();
 	
 	void setNeedsTask(bool task);
-	void setID(int id);
+	//void setID(int id);
 	void setTarget(int targetX, int targetY, int job, int atJob);
 	void setLocation(int x, int y);
 	bool needsNewTask();
 
-	void consume();
-	void wait(int typeOfWaiting);
-
 	std::string texturePath;
 
 
-	int jobs[4]; // x = 0, y = 1, id = 2: will help link things like what to build there or who they fighting, taskID = 3: task id will say what they need to do when they get there.
+	int tasks[4]; // x = 0, y = 1, id = 2: will help link things like what to build there or who they fighting, taskID = 3: task id will say what they need to do when they get there.
 	int actions[10];
-	int skills[5];
-	int actionPoint = 0;
-	bool needsTask = true;
+	int baseSkills[5];
+	int actualSkills[5];
+
+
+    std::vector<int>      needMeters;	// needs to be loaded from a function	(think like hunger thirst sleep ENUMS
+	std::vector<NEEDS>    needs;
+	std::vector<TRAITS>   traits;
+	std::vector<STATES>   states;
+
+	int health = 100;
+	int excertion = 1;
 	int xpos;
 	int ypos;
-	int Hunger;
-	int Health;
-
 	int loadCode;
+	int objId;
+	int sufferingAmount = 0;
+
+
 	bool isActive;	// checks to see if it can even do things
 	bool isAlive = true;
-
-	int objId;
-	int waitTime;
+	bool needsTask = true;
+	bool stateChecked = false;
 };

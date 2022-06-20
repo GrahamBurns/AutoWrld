@@ -107,7 +107,9 @@ void WrldLoop::update()
 			OLA.MapRef(wrldGen);
 			OLA.spawnEntity(0,0);
 			maker->generateWrld();
-			textureLoader->loadTextures(OLA.getNPC(0));
+			//textureLoader->loadTextures(OLA.getNPC(0));
+			textureLoader->loadTexturesVehicle(OLA.getVehicle(0));
+			
 		}
 		OLA.UpdatePathAI();
 		coords = 1;
@@ -123,6 +125,12 @@ void WrldLoop::render()
 
 	SDL_RenderClear(renderer);
 	wrldGen->DrawMap(xOffset,yOffset);
+	if (OLA.getVehicleCount() != NULL) {
+		for (int i = 0; i < OLA.getVehicleCount(); i++) {
+			textureLoader->renderVehicle(OLA.getVehicle(i), xOffset, yOffset);
+		}
+	}
+
 	if (OLA.getNPCCount() != NULL) {
 		for (int i = 0; i < OLA.getNPCCount(); i++) {
 			textureLoader->render(OLA.getNPC(i),xOffset,yOffset);
